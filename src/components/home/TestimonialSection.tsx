@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 
 const dummyReviews = [
-  { text: "\"New World is awesome — truly fast, reliable, and refreshingly transparent. There are no hidden fees, no extra charges, and absolutely no annual fees — just a small transfer fee, and that's it. I honestly cannot imagine ever going back to using traditional banks for my overseas transactions. Highly recommended!\"", author: "Taimoor Tayyab (Tami)", bg: "bg-accent", textCol: "text-primary" },
-  { text: "\"New World is a popular money transfer app known for being *easy*, and *fast* for sending money abroad. The app design is clean, intuitive, and gives me complete peace of mind with every single transfer.\"", author: "Priyanka Dey", bg: "bg-btn-bg", textCol: "text-accent" },
+  { text: "\"Wise is awesome — truly fast, reliable, and refreshingly transparent. There are no hidden fees, no extra charges, and absolutely no annual fees — just a small transfer fee, and that's it. I honestly cannot imagine ever going back to using traditional banks for my overseas transactions. Highly recommended!\"", author: "Taimoor Tayyab (Tami)", bg: "bg-accent", textCol: "text-primary" },
+  { text: "\"Wise is a popular money transfer app known for being *easy*, and *fast* for sending money abroad. The app design is clean, intuitive, and gives me complete peace of mind with every single transfer.\"", author: "Priyanka Dey", bg: "bg-btn-bg", textCol: "text-accent" },
   { text: "\"I've been using it for over 3 years. It's incredibly cheap compared to normal banks and the UI is very user friendly. Switching to this app has literally saved me hundreds of dollars in unfavorable exchange rates.\"", author: "John Smith", bg: "bg-accent", textCol: "text-primary" },
   { text: "\"The best feature is being able to hold multiple currencies at the same time. It changed how I handle my international clients, allowing me to receive payments instantly without suffering terrible conversion rates at my local bank.\"", author: "Elena Rossi", bg: "bg-btn-bg", textCol: "text-accent" },
   { text: "\"Seamless connection and fast transfers. Customer service actually replies in a few hours if there's an issue, and they go out of their way to ensure my money arrives safely and on time.\"", author: "Satoshi T.", bg: "bg-accent", textCol: "text-primary" },
@@ -46,7 +46,7 @@ export default function TestimonialSection() {
             </h2>
 
             <p className="text-[19px] text-primary/90 font-medium mb-6 md:mb-12 max-w-[300px]">
-              See the stories of people worldwide choosing New World.
+              See the stories of people worldwide choosing Wise.
             </p>
 
             <div className="flex gap-4 mt-auto">

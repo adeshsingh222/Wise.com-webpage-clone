@@ -16,7 +16,7 @@ export default function AppSection() {
 
           <div className="flex items-center gap-6 bg-white p-4 rounded-3xl border border-slate-200 shadow-sm w-fit">
             <span className="text-[17px] font-bold leading-tight max-w-[100px] pl-2">
-              Scan to get the New World app
+              Scan to get the Wise app
             </span>
             <div className="w-[84px] h-[84px] bg-slate-100 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden outline outline-1 outline-slate-200 outline-offset-[-1px]">
               <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wise.com" className="w-[74px] h-[74px] mix-blend-multiply" alt="QR Code" />

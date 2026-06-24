@@ -119,10 +119,10 @@ function RateModalContent({
       {/* Guaranteed row */}
       <div className="text-center mb-5">
         <div className="flex items-center justify-center gap-1.5 text-[16px] font-semibold text-slate-700 mb-2">
-          <Lock size={14} /> We've locked this rate for 67 hours
+          <Lock size={14} /> We&apos;ve locked this rate for 67 hours
         </div>
         <p className="text-[15px] text-slate-500 leading-relaxed max-w-[320px] mx-auto">
-          You're safe from rate fluctuations as long as we receive your money by <strong>Friday, June 27 at 8:29 PM.</strong>
+          You&apos;re safe from rate fluctuations as long as we receive your money by <strong>Friday, June 27 at 8:29 PM.</strong>
         </p>
       </div>
 
@@ -130,15 +130,15 @@ function RateModalContent({
 
       {/* Mid-market section */}
       <div className="mb-5">
-        <h3 className="text-[19px] font-black mb-3">Our rate isn't hiding anything</h3>
+        <h3 className="text-[19px] font-black mb-3">Our rate isn&apos;t hiding anything</h3>
         <p className="text-[15px] text-slate-600 leading-relaxed mb-3">
-          We always use the <strong>mid-market exchange rate.</strong> It's the fair rate between the buy and sell price for two currencies.
+          We always use the <strong>mid-market exchange rate.</strong> It&apos;s the fair rate between the buy and sell price for two currencies.
         </p>
         <p className="text-[15px] text-slate-600 leading-relaxed mb-4">
           Beware of banks and providers offering rates below the mid-market rate. Your recipient might get less even with low or zero fees.
         </p>
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-[15px] text-slate-500 leading-relaxed">
-          We don't have comparison data for these currencies and transfer amounts, but we'll keep working to help you compare more currencies, price points and providers.
+          We don&apos;t have comparison data for these currencies and transfer amounts, but we&apos;ll keep working to help you compare more currencies, price points and providers.
         </div>
       </div>
 
@@ -152,8 +152,8 @@ function RateModalContent({
               key={t}
               onClick={() => setTab(t)}
               className={`px-4 py-1.5 rounded-full text-[15px] font-semibold transition-colors border ${tab === t
-                  ? "bg-new-world-dark text-white border-new-world-dark"
-                  : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                ? "bg-new-world-dark text-white border-new-world-dark"
+                : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
                 }`}
             >
               {t}
@@ -202,11 +202,14 @@ export default function CurrencyConverter() {
   const [isCalculating, setIsCalculating] = useState(false);
   const calcTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
-    setIsCalculating(true);
+    const t1 = setTimeout(() => setIsCalculating(true), 0);
     if (calcTimer.current) clearTimeout(calcTimer.current);
     calcTimer.current = setTimeout(() => setIsCalculating(false), 700);
-    return () => { if (calcTimer.current) clearTimeout(calcTimer.current); };
-  }, [sendAmount]);
+    return () => { 
+      clearTimeout(t1);
+      if (calcTimer.current) clearTimeout(calcTimer.current); 
+    };
+  }, [sendAmount, sourceCurr, targetCurr]);
 
   const displayValue = isFocused
     ? sendAmount
@@ -283,7 +286,7 @@ export default function CurrencyConverter() {
               >
                 <div className="bg-[#f0f7fa] text-[#0091be] rounded-xl p-3 text-[13px] flex items-start gap-2.5 border border-[#d6edf5]">
                   <Globe size={16} className="shrink-0 mt-0.5" />
-                  <span>Sending over 25,000 USD or equivalent? <a href="#" className="underline font-bold hover:opacity-80">We'll discount our fee</a></span>
+                  <span>Sending over 25,000 USD or equivalent? <a href="#" className="underline font-bold hover:opacity-80">We&apos;ll discount our fee</a></span>
                 </div>
               </motion.div>
             )}
@@ -294,10 +297,17 @@ export default function CurrencyConverter() {
             <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
               <Clock size={17} className="text-slate-600" />
             </div>
-            <div>
-              <p className="text-[13px] text-slate-500 font-medium">Arrives</p>
-              <p className="font-bold text-[15px]">by Thursday</p>
-            </div>
+            {isCalculating ? (
+              <div className="flex flex-col gap-2 py-1 w-32">
+                <div className="h-3 bg-slate-200 rounded animate-pulse w-1/2"></div>
+                <div className="h-4 bg-slate-200 rounded animate-pulse w-full"></div>
+              </div>
+            ) : (
+              <div>
+                <p className="text-[13px] text-slate-500 font-medium">Arrives</p>
+                <p className="font-bold text-[15px]">by Thursday</p>
+              </div>
+            )}
           </div>
 
           {/* Total fees */}
@@ -306,28 +316,42 @@ export default function CurrencyConverter() {
               <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
                 <FileText size={17} className="text-slate-600" />
               </div>
-              <div>
-                <p className="text-[13px] text-slate-500 font-medium">Total fees ({(feePercentage * 100).toFixed(2)}%)</p>
-                <p className="font-bold text-[15px]">Included in {sourceCurr.code} amount</p>
-                <AnimatePresence>
-                  {isHighVolume && (
-                    <motion.div
-                      key="hv-tag"
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="mt-2 inline-flex items-center gap-1.5 bg-[#edf7ee] text-[#1e7e34] px-2.5 py-1 rounded-lg text-[12px] font-bold"
-                    >
-                      <Tag size={12} /> {formatWithCommas(parseFloat((fee * 0.18).toFixed(2)))} {sourceCurr.code} volume discount
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+              {isCalculating ? (
+                <div className="flex flex-col gap-2 py-1 w-48">
+                  <div className="h-3 bg-slate-200 rounded animate-pulse w-2/3"></div>
+                  <div className="h-4 bg-slate-200 rounded animate-pulse w-full"></div>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-[13px] text-slate-500 font-medium">Total fees ({(feePercentage * 100).toFixed(2)}%)</p>
+                  <p className="font-bold text-[15px]">Included in {sourceCurr.code} amount</p>
+                  <AnimatePresence>
+                    {isHighVolume && (
+                      <motion.div
+                        key="hv-tag"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        className="mt-2 inline-flex items-center gap-1.5 bg-[#edf7ee] text-[#1e7e34] px-2.5 py-1 rounded-lg text-[12px] font-bold"
+                      >
+                        <Tag size={12} /> {formatWithCommas(parseFloat((fee * 0.18).toFixed(2)))} {sourceCurr.code} volume discount
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
+            </div>
+
+            {isCalculating ? (
+              <div className="h-5 bg-slate-200 rounded animate-pulse w-16 md:w-20 mt-1"></div>
+            ) : (
+              <div
+                className="flex items-center gap-0.5 font-bold text-[14px] text-slate-700 cursor-pointer underline decoration-1 underline-offset-2 hover:opacity-70 whitespace-nowrap mt-1"
+              >
+                {formatWithCommas(parseFloat(fee.toFixed(2)))} {sourceCurr.code} <ChevronRight size={15} />
               </div>
-            </div>
-            <div className="flex items-center gap-0.5 font-bold text-[14px] text-slate-700 cursor-pointer underline decoration-1 underline-offset-2 hover:opacity-70 whitespace-nowrap mt-1">
-              {formatWithCommas(parseFloat(fee.toFixed(2)))} {sourceCurr.code} <ChevronRight size={15} />
-            </div>
+            )}
           </div>
         </div>
 
@@ -338,9 +362,15 @@ export default function CurrencyConverter() {
           <span className="text-[15px] font-medium text-slate-500 block mb-4">Recipient gets</span>
           <div className="flex items-center justify-between gap-3">
             <CurrencyDropdown selected={targetCurr} onSelect={setTargetCurr} />
-            <span className="text-[36px] md:text-[42px] font-black tracking-tight text-new-world-dark flex-1 text-right min-w-0">
-              {parseFloat(receiveAmount) > 0 ? formatWithCommas(parseFloat(receiveAmount)) : "0.00"}
-            </span>
+            {isCalculating ? (
+              <div className="flex-1 flex justify-end">
+                <div className="h-10 md:h-12 bg-slate-200 rounded animate-pulse w-32 md:w-48 my-1"></div>
+              </div>
+            ) : (
+              <span className="text-[36px] md:text-[42px] font-black tracking-tight text-new-world-dark flex-1 text-right min-w-0 inline-block">
+                {parseFloat(receiveAmount) > 0 ? formatWithCommas(parseFloat(receiveAmount)) : "0.00"}
+              </span>
+            )}
           </div>
         </div>
 
@@ -358,7 +388,7 @@ export default function CurrencyConverter() {
               <div className="mb-4 bg-[#f3f9ec] rounded-2xl p-5 text-new-world-dark border border-[#ddedc8] flex items-start gap-4">
                 <span className="text-3xl shrink-0">🌍</span>
                 <div>
-                  <p className="font-bold text-[15px] mb-1">You're sending a lot so we discounted our fee</p>
+                  <p className="font-bold text-[15px] mb-1">You&apos;re sending a lot so we discounted our fee</p>
                   <p className="text-[13px] text-slate-600 mb-3 leading-relaxed">Savings on this transfer, and eligible transfers for the rest of the month. Plus dedicated support from our expert team.</p>
                   <a href="#" className="text-[13px] font-bold underline hover:opacity-80">Learn more about sending large amounts</a>
                 </div>
@@ -369,7 +399,7 @@ export default function CurrencyConverter() {
 
         {/* ── CTA ── */}
         <div className="px-6 pb-6 md:px-8 md:pb-8">
-          <button className="w-full bg-accent hover:bg-[#bce65f] text-new-world-dark py-4 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3">
+          <button className="w-full bg-accent text-new-world-dark py-4 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3">
             {isCalculating ? (
               <>
                 <svg className="animate-spin h-5 w-5 text-new-world-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

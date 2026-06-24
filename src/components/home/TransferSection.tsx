@@ -83,7 +83,7 @@ export default function TransferSection() {
             </div>
           </div>
 
-          <button className="w-full md:w-auto mt-12 bg-accent hover:bg-[#bce65f] text-primary px-8 py-3 md:py-4 rounded-full font-bold text-lg transition-colors">
+          <button className="w-full md:w-auto mt-12 bg-accent text-primary px-8 py-3 md:py-4 rounded-full font-bold text-lg transition-colors">
             Learn about sending money
           </button>
         </div>

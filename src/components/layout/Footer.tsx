@@ -53,9 +53,9 @@ export default function Footer() {
         </div>
 
         <div className="text-[13px] text-new-world-dark/70 font-medium space-y-4 max-w-5xl leading-relaxed">
-          <p>© New World Payments Limited {new Date().getFullYear()}</p>
-          <p>New World Payments Limited (New World) is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011, Firm Reference 900507, for the issuing of electronic money. New World works with a local bank partner to offer inward remittance service to India with the approval of the Reserve Bank of India (RBI).</p>
-          <p>Vaho Forex Private Limited holds an Authorised Dealer Category II license with the RBI to provide outward remittance services for limited purposes and forex card services as per applicable laws. New World Payments India Private Limited currently is an in-principle approved Payment Aggregator - Cross Border.</p>
+          <p>© Wise Payments Limited {new Date().getFullYear()}</p>
+          <p>Wise Payments Limited (Wise) is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011, Firm Reference 900507, for the issuing of electronic money. Wise works with a local bank partner to offer inward remittance service to India with the approval of the Reserve Bank of India (RBI).</p>
+          <p>Vaho Forex Private Limited holds an Authorised Dealer Category II license with the RBI to provide outward remittance services for limited purposes and forex card services as per applicable laws. Wise Payments India Private Limited currently is an in-principle approved Payment Aggregator - Cross Border.</p>
         </div>
       </div>
     </footer>
