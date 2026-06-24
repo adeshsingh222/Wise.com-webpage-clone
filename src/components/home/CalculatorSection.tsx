@@ -13,7 +13,7 @@ export default function CalculatorSection() {
             Use our calculator to see how much more you&apos;d get when you send money with Wise.
           </p>
 
-          <button className="w-full md:w-auto bg-primary hover:bg-slate-800 text-white px-8 py-3 md:py-4 rounded-full font-bold text-lg transition-colors">
+          <button className="w-full md:w-auto bg-btn-bg  text-accent px-8 py-3 md:py-4 rounded-full font-bold text-lg transition-colors">
             See our pricing
           </button>
         </div>

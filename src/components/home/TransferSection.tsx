@@ -2,7 +2,7 @@ import { GraduationCap, Plane, HeartPulse } from "lucide-react";
 
 export default function TransferSection() {
   return (
-    <section className="w-full bg-white py-20 px-6 text-primary border-t border-slate-100">
+    <section className="w-full bg-white py-12 md:py-20 px-6 text-primary">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-16">
 
         <div className="flex-1 w-full flex justify-start">

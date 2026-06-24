@@ -2,7 +2,7 @@ import { ArrowRightLeft, CreditCard } from "lucide-react";
 
 export default function TravelSection() {
   return (
-    <section className="w-full bg-white py-20 px-6 text-primary border-t border-slate-100">
+    <section className="w-full bg-white py-12 md:py-20 px-6 text-primary">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
         <div className="flex-1">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-[-0.03em] leading-[0.9] mb-6">

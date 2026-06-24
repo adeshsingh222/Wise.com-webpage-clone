@@ -24,7 +24,7 @@ export default function WorksNearlyEverywhere() {
     const [activeTab, setActiveTab] = useState('send');
 
     return (
-        <section className="py-24 bg-[#f2f4f2] text-new-world-dark">
+        <section className="py-12 md:py-24 bg-[#f2f4f2] text-new-world-dark">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <h2 className="text-[36px] md:text-[48px] font-bold leading-tight tracking-tight mb-8">
                     New World works nearly everywhere

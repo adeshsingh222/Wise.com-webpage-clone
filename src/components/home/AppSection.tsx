@@ -1,16 +1,16 @@
 export default function AppSection() {
   return (
-    <section className="w-full bg-white py-20 px-6 text-primary">
+    <section className="w-full bg-white pt-12 pb-24 px-6 text-primary">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
 
         <div className="flex-1 w-full">
-          <div className="w-full h-[600px] bg-slate-100 rounded-[40px] flex items-center justify-center text-slate-400 font-bold border border-slate-200 overflow-hidden shadow-sm relative">
+          <div className="w-full h-[400px] md:h-[600px] bg-slate-100 rounded-[40px] flex items-center justify-center text-slate-400 font-bold border border-slate-200 overflow-hidden shadow-sm relative">
             <img src="https://wise.com/static-assets/app/_next/static/media/app-lg.f897f08e.jpg" alt="" />
           </div>
         </div>
 
         <div className="flex-1">
-          <h2 className="text-6xl md:text-[100px] font-black uppercase tracking-[-0.04em] leading-[0.85] mb-12">
+          <h2 className="text-5xl md:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.85] mb-12">
             Take Wise everywhere you go
           </h2>
 

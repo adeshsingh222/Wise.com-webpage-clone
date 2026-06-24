@@ -2,7 +2,7 @@ import { Star, Building2, HeadphonesIcon } from "lucide-react";
 
 export default function FeaturesGrid() {
   return (
-    <section className="w-full bg-white pt-[250px] md:pt-[400px] pb-24 px-6 text-primary">
+    <section className="w-full bg-white pt-[250px] md:pt-[400px] pb-12 md:pb-24 px-6 text-primary">
       <h2 className="text-4xl md:text-6xl font-black text-center uppercase tracking-tight max-w-3xl mx-auto mb-20 leading-[0.9]">
         Take Control Of Your Money
       </h2>

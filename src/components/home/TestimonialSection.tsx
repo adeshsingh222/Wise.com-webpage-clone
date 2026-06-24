@@ -27,7 +27,7 @@ export default function TestimonialSection() {
   };
 
   return (
-    <section className="py-24 bg-white text-primary overflow-hidden">
+    <section className="py-12 bg-white text-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-6 md:gap-8 lg:gap-20">
 
@@ -54,8 +54,8 @@ export default function TestimonialSection() {
                 onClick={prev}
                 disabled={currentIndex === 0}
                 className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed ${currentIndex === 0
-                    ? 'bg-[#f2f4f2] text-slate-400'
-                    : 'bg-accent hover:bg-[#90d65b] text-primary'
+                  ? 'bg-[#f2f4f2] text-slate-400'
+                  : 'bg-accent hover:bg-[#90d65b] text-primary'
                   }`}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
@@ -64,8 +64,8 @@ export default function TestimonialSection() {
                 onClick={next}
                 disabled={currentIndex === dummyReviews.length - 1}
                 className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed ${currentIndex === dummyReviews.length - 1
-                    ? 'bg-[#f2f4f2] text-slate-400'
-                    : 'bg-accent hover:bg-[#90d65b] text-primary'
+                  ? 'bg-[#f2f4f2] text-slate-400'
+                  : 'bg-accent hover:bg-[#90d65b] text-primary'
                   }`}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
@@ -107,7 +107,7 @@ export default function TestimonialSection() {
                           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play" className="w-10 h-10 ml-1" />
                         </div>
 
-                        <p className="text-[21px] font-bold leading-tight mb-8">
+                        <p className="text-lg md:text-[21px] font-medium md:font-bold leading-tight mb-8">
                           {review.text}
                         </p>
 

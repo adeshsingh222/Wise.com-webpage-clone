@@ -2,7 +2,7 @@ import { Users, Shield, Landmark } from "lucide-react";
 
 export default function SecuritySection() {
   return (
-    <section className="w-full bg-white py-24 px-6 text-primary">
+    <section className="w-full bg-white pt-24 pb-12 px-6 text-primary">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
 
         <div className="flex-1">
