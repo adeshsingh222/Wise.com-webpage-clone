@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   X,
@@ -480,6 +480,11 @@ export default function Navbar() {
   const [prevMenu, setPrevMenu] = useState<MenuType>(null);
 
   const { openAuthModal } = useAuth();
+  
+  const setMenuOpenRef = useRef(setMenuOpen);
+  useEffect(() => {
+    setMenuOpenRef.current = setMenuOpen;
+  }, [setMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -497,13 +502,30 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Lock body scroll when mobile menu open
+  // Lock body scroll and handle history pushState for native back button on mobile
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    if (!menuOpen) {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      
+      const stateId = Math.random().toString();
+      window.history.pushState({ menuId: stateId }, "");
+      
+      const handlePopState = () => {
+        setMenuOpenRef.current(false);
+      };
+      window.addEventListener("popstate", handlePopState);
+      
+      return () => { 
+        document.body.style.overflow = ""; 
+        window.removeEventListener("popstate", handlePopState);
+        if (window.history.state?.menuId === stateId) {
+          window.history.back();
+        }
+      };
+    } else {
       setTimeout(() => setMobileView("root"), 300);
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   const handleMenuEnter = (menu: MenuType) => {

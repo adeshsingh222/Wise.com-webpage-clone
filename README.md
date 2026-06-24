@@ -13,9 +13,9 @@ A high-performance, pixel-perfect clone of the Wise.com homepage. This project w
 I opted for a modern, industry-standard stack to ensure maximum performance and developer experience:
 
 - **Next.js 15 (App Router):** Chosen for its robust architecture, server-side rendering capabilities (which drastically improves LCP and SEO), and optimized image handling.
-- **React 19:** Leveraged for building modular, functional components with complex local state management.
+- **React 19:** Leveraged for building modular, functional components with complex local state management and global `Context API`.
 - **Tailwind CSS v4:** Allowed for rapid styling, fluid typography, and built-in responsiveness without the bloat of traditional CSS pre-processors. 
-- **Framer Motion:** Used to orchestrate smooth, hardware-accelerated micro-animations (like the calculator skeleton loaders and layout shifts) that make the UI feel premium and alive.
+- **Framer Motion:** Used to orchestrate smooth, hardware-accelerated micro-animations, bidirectional sliding mobile menus, and layout shifts that make the UI feel premium and alive.
 - **Lucide React:** Chosen for clean, lightweight, and scalable SVG icons.
 
 *Note: No external component libraries (like Material UI or Radix) were used. Complex interactive elements like the custom currency dropdowns and modal systems were built from scratch to demonstrate core engineering skills.*
@@ -26,7 +26,7 @@ I opted for a modern, industry-standard stack to ensure maximum performance and 
 
 The project follows a feature-based folder structure, which ensures high maintainability and scalability as the codebase grows:
 
-```
+```text
 src/
 ├── app/
 │   ├── layout.tsx         # Global layout and font definitions
@@ -37,6 +37,8 @@ src/
 │   ├── home/              # Presentational sections (Hero, Features, Testimonials)
 │   ├── layout/            # Shared structural components (Navbar, Footer)
 │   └── ui/                # Reusable atoms (ModalDrawer)
+├── context/
+│   └── AuthContext.tsx    # Global Application Context for Authentication UI
 ```
 
 ---
@@ -44,20 +46,14 @@ src/
 ## 3. Maintainability, Performance, and UX
 
 ### Maintainability & Architecture
+- **Global Auth Architecture:** Authentication UI is abstracted into a global `AuthContext` wrapper. The highly dynamic `AuthModal` is rendered precisely once at the root level to avoid stacking context bugs, and can dynamically absorb calculation data (e.g., passing dynamic currency amounts from the calculator to the root modal).
 - **Component Modularity:** The monolithic homepage was broken down into 10+ independent section components (`TestimonialSection`, `FeaturesGrid`, etc.).
-- **Localized State:** Rather than introducing unnecessary global state (like Redux or Zustand), state is kept localized. The `CurrencyConverter` acts as a single source of truth for its child components, orchestrating dependent logic (amounts, fees, active currencies) cleanly and preventing infinite render loops.
-- **Centralized Assets:** Reusable configuration and static data (like the currency rate tables and testimonial reviews) are abstracted out of the JSX to keep render functions clean.
-- **Dynamic Interactions:** Navigation links feature complex interactions (such as the Framer Motion-powered "Personal" mega-menu dropdown) to demonstrate high-fidelity UI recreation, while authentication flows are left static to focus on the core layout and calculator functionality.
-
-### Performance Optimizations
-- **Next/Image & CDNs:** All flags and complex graphics are served via optimized CDNs (Flagcdn, Unsplash) or statically generated.
-- **Skeleton UI:** Instead of blocking the UI or using jarring spinners, the calculator utilizes a pulsing Skeleton UI during "network" requests, ensuring layout stability and reducing Cumulative Layout Shift (CLS).
-- **CSS over JS:** Heavy lifting for layouts (like grids and flexboxes) is done strictly via Tailwind classes, leaving JavaScript to handle only interaction and logic.
+- **Localized State:** Rather than introducing unnecessary global state (like Redux or Zustand), state is kept localized unless absolutely necessary (like the global Auth Context).
 
 ### Seamless UX & Responsiveness
-- **Mobile-First Design:** The application scales flawlessly from 320px mobile screens to 4K monitors. 
+- **Native-Like Mobile Navigation:** The mobile hamburger menu implements an incredibly robust bidirectional slider mimicking an iOS `UINavigationController`. Tapping nested sub-menus visually pushes new views onto the stack.
+- **History State Interception (`popstate`):** Opening drawers or modals automatically pushes a dummy state to the browser's `history`. If a user attempts a native edge swipe on their mobile device (to go "back"), we intercept the `popstate` event and gracefully close the drawer without leaving the web application!
 - **Adaptive Components:** The custom `ModalDrawer` component intelligently acts as a centered, focused modal on desktop screens, but seamlessly transforms into a swipeable bottom-sheet drawer on mobile devices, mimicking native app behaviors.
-- **Fluid Typography:** Tailwind's `md:` and `lg:` breakpoints were heavily utilized to ensure text hierarchy remains legible and perfectly proportioned across all devices.
 
 ---
 
@@ -65,11 +61,11 @@ src/
 
 **Complex Interdependent State Management**
 The biggest technical hurdle was recreating the `CurrencyConverter` widget. When a user changes the source currency, the target currency, or the amount, multiple things need to happen simultaneously: fees must be recalculated, volume discounts evaluated, exchange rates updated, and the UI must trigger a "loading" state. 
-* **Solution:** I abstracted the calculation logic into a `useEffect` hook that listens to changes in currency dependencies. It triggers a simulated network delay and coordinates conditional rendering with Tailwind skeleton loaders to process the math without locking up the main thread or causing visual jank.
+* **Solution:** I abstracted the calculation logic into a `useEffect` hook that listens to changes in currency dependencies. It triggers a simulated network delay and coordinates conditional rendering with Tailwind skeleton loaders to process the math without locking up the main thread.
 
-**Accessible Custom Dropdowns**
-Building a custom dropdown menu that looks identical to native inputs but behaves like a searchable modal was challenging.
-* **Solution:** I implemented a custom React hook to detect "clicks outside" of the dropdown to close it securely. I also ensured that the input field within the dropdown auto-focuses on open, improving keyboard navigability.
+**Bidirectional Mobile Menu Animations**
+Building a nested mobile menu that pushes "in" and pulls "out" seamlessly without absolute positioning clipping issues was difficult.
+* **Solution:** Used Framer Motion's `AnimatePresence` `custom` prop to pass an explicit direction integer `1` (forwards) or `-1` (backwards). By mapping these values dynamically inside variant objects, the sliding stack handles its physics identically to native operating systems.
 
 ---
 
