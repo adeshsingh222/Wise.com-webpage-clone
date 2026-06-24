@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wise Clone
 
-## Getting Started
+A high-performance, pixel-perfect clone of the Wise.com frontend, focused on clean architecture, smooth animations, and complex UI state management.
 
-First, run the development server:
+## Tech Stack
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
 
+## Why no global state exists
+No global state management solution was introduced because the recreated screen consists primarily of presentational and localized interactive components. State is kept close to where it is used to reduce complexity and improve maintainability.
+
+## Key Features & Implementations
+
+### 1. Zero External UI Components
+To demonstrate core engineering skills, no external UI libraries (like Radix or MUI) were used. Complex elements like the `CurrencyDropdown`—featuring search filtering, click-outside-to-close logic, and accessible state management—were built entirely from scratch.
+
+### 2. Complex Local State Management
+The `CurrencyConverter` orchestrates complex dependent state without infinite render loops. Changes to the "Send" amount, "Receive" amount, currency selection, and fee calculations are all derived from a single source of truth on every render, keeping the component perfectly synchronized.
+
+### 3. High-Performance Animations
+Framer Motion was utilized to handle staggered layout shifts, smooth modal pop-ins, and dynamic widget resizing without jank. 
+
+### 4. Custom Reusable UI
+- **ModalDrawer**: A responsive modal system that acts as a centered modal on desktop and seamlessly converts to a bottom-sheet drawer on mobile.
+- **Fluid Typography & Responsive Grids**: Scales flawlessly from mobile devices to 4K monitors using Tailwind's robust responsive utilities.
+
+## Local Development
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

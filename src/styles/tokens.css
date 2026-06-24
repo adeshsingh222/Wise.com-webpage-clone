@@ -1,0 +1,141 @@
+/* ============================================================
+   WISE CLONE — Design Token System
+   All brand colors, typography, and reusable component classes
+   live here. Never hardcode hex values in component files.
+   ============================================================ */
+
+/* ── 1. Raw CSS variables (the source of truth) ── */
+:root {
+  /* Brand Colors */
+  --wise-primary: #0E2A14;
+  --wise-btn-bg: #163300;
+  /* dark forest green — text, headings, dark backgrounds */
+  --wise-accent: #9FE870;
+  /* lime green — hero bg, CTA buttons, highlights */
+  --wise-teal: #002B2B;
+  /* dark teal — currency widget, secondary dark elements */
+  --wise-text-muted: #64748b;
+  /* slate-500 — subheadings, body text */
+  --wise-border: #e2e8f0;
+  /* slate-200 — card borders, dividers */
+
+  /* Border Radii */
+  --wise-radius-card: 36px;
+  --wise-radius-button: 9999px;
+  --wise-radius-image: 24px;
+
+  /* Shadows */
+  --wise-shadow-card: 0 4px 24px 0 rgba(14, 42, 20, 0.08);
+}
+
+/* ── 2. Tailwind v4 theme extension ──
+   Generates bg-primary, text-primary, bg-accent, text-accent, etc. */
+@theme inline {
+  --color-primary: var(--wise-primary);
+  --color-btn-bg: var(--wise-btn-bg);
+  --color-accent: var(--wise-accent);
+  --color-teal: var(--wise-teal);
+  --color-muted: var(--wise-text-muted);
+  --color-border: var(--wise-border);
+}
+
+/* ── 3. Reusable component utility classes ── */
+
+/* Buttons */
+.btn-dark-green {
+  background-color: var(--wise-btn-bg);
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  border-radius: var(--wise-radius-button);
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-dark-green:hover {
+  background-color: #0b1a00;
+}
+
+.btn-primary {
+  background-color: var(--wise-primary);
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  border-radius: var(--wise-radius-button);
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1a3d20;
+}
+
+.btn-accent {
+  background-color: var(--wise-accent);
+  color: var(--wise-primary);
+  padding: 1rem 2.5rem;
+  border-radius: var(--wise-radius-button);
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-accent:hover {
+  background-color: #bce65f;
+}
+
+/* Section headings */
+.section-heading {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--wise-primary);
+}
+
+/* Cards */
+.wise-card {
+  border-radius: var(--wise-radius-card);
+  box-shadow: var(--wise-shadow-card);
+  overflow: hidden;
+}
+
+.wise-card-primary {
+  background-color: var(--wise-accent);
+  color: var(--wise-primary);
+  border-radius: var(--wise-radius-card);
+}
+
+.wise-card-dark {
+  background-color: var(--wise-primary);
+  color: var(--wise-accent);
+  border-radius: var(--wise-radius-card);
+}
+
+/* Nav link */
+.nav-link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition: opacity 0.15s;
+}
+
+.nav-link:hover {
+  opacity: 0.65;
+}
+
+/* Icon circle (used in feature/security sections) */
+.icon-circle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
