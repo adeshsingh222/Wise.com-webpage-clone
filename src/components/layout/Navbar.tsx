@@ -23,6 +23,7 @@ import {
   Grid,
   Building2
 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 // --- Data ---
 
@@ -287,9 +288,10 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Advanced Mega Menu state
   const [activeMenu, setActiveMenu] = useState<MenuType>(null);
   const [prevMenu, setPrevMenu] = useState<MenuType>(null);
+
+  const { openAuthModal } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -350,15 +352,14 @@ export default function Navbar() {
               className="relative py-4 -my-4 flex items-center "
               onMouseEnter={() => handleMenuEnter("personal")}
             >
-              <Link 
-                href="#" 
-                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${
-                  activeMenu === "personal" 
-                    ? "bg-accent/50 text-new-world-dark" 
-                    : activeMenu 
-                      ? "hover:bg-accent/50" 
+              <Link
+                href="#"
+                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${activeMenu === "personal"
+                    ? "bg-accent/50 text-new-world-dark"
+                    : activeMenu
+                      ? "hover:bg-accent/50"
                       : "hover:bg-black/5"
-                }`}
+                  }`}
               >
                 Personal
               </Link>
@@ -367,15 +368,14 @@ export default function Navbar() {
               className="relative py-4 -my-4 flex items-center"
               onMouseEnter={() => handleMenuEnter("business")}
             >
-              <Link 
-                href="#" 
-                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${
-                  activeMenu === "business" 
-                    ? "bg-accent/50 text-new-world-dark" 
-                    : activeMenu 
-                      ? "hover:bg-accent/50" 
+              <Link
+                href="#"
+                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${activeMenu === "business"
+                    ? "bg-accent/50 text-new-world-dark"
+                    : activeMenu
+                      ? "hover:bg-accent/50"
                       : "hover:bg-black/5"
-                }`}
+                  }`}
               >
                 Business
               </Link>
@@ -384,15 +384,14 @@ export default function Navbar() {
               className="relative py-4 -my-4 flex items-center"
               onMouseEnter={() => handleMenuEnter("platform")}
             >
-              <Link 
-                href="#" 
-                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${
-                  activeMenu === "platform" 
-                    ? "bg-accent/50 text-new-world-dark" 
-                    : activeMenu 
-                      ? "hover:bg-accent/50" 
+              <Link
+                href="#"
+                className={`px-4 py-2 transition-all duration-200 rounded-[20px] ${activeMenu === "platform"
+                    ? "bg-accent/50 text-new-world-dark"
+                    : activeMenu
+                      ? "hover:bg-accent/50"
                       : "hover:bg-black/5"
-                }`}
+                  }`}
               >
                 Platform
               </Link>
@@ -410,19 +409,21 @@ export default function Navbar() {
           </Link>
           <Link href="#" className="hover:opacity-70 transition-opacity">Help</Link>
           <Link href="#" className="hover:opacity-70 transition-opacity">Log in</Link>
-          <Link href="#" className={`px-4 py-2 rounded-full transition-colors ${activeMenu ? "bg-primary text-white hover:bg-slate-800" : "bg-primary text-accent hover:bg-slate-800"}`}>
-            Sign up
-          </Link>
-        </div>
-
-        {/* Right — mobile: sign up + hamburger */}
-        <div className="flex md:hidden items-center gap-3">
-          <Link
-            href="#"
-            className="bg-btn-bg hover:bg-slate-800 text-accent px-5 py-2 rounded-full font-bold text-[14px] transition-colors"
+          <button
+            onClick={() => openAuthModal()}
+            className={`cursor-pointer px-4 py-2 rounded-full transition-colors ${activeMenu ? "bg-primary text-white hover:bg-slate-800" : "bg-primary text-accent hover:bg-slate-800"}`}
           >
             Sign up
-          </Link>
+          </button>
+        </div>
+
+        <div className="flex md:hidden items-center gap-3">
+          <button
+            onClick={() => openAuthModal()}
+            className="bg-btn-bg cursor-pointer hover:bg-slate-800 text-accent px-5 py-2 rounded-full font-bold text-[14px] transition-colors"
+          >
+            Sign up
+          </button>
           <button
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
@@ -591,13 +592,15 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.44, duration: 0.3 }}
                 >
-                  <Link
-                    href="#"
-                    onClick={() => setMenuOpen(false)}
-                    className="mt-2 w-full bg-accent hover:bg-btn-bg text-btn-bg py-3.5 rounded-full font-bold text-[15px] text-center transition-colors block"
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      openAuthModal();
+                    }}
+                    className="mt-2 cursor-pointer w-full bg-accent hover:bg-btn-bg text-btn-bg py-3.5 rounded-full font-bold text-[15px] text-center transition-colors block"
                   >
                     Sign up — it&apos;s free
-                  </Link>
+                  </button>
                 </motion.div>
               </div>
             </motion.div>

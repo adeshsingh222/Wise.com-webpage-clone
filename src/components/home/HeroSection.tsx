@@ -1,4 +1,10 @@
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+
 export default function HeroSection() {
+  const { openAuthModal } = useAuth();
+
   return (
     <section className="w-full bg-accent text-primary flex flex-col items-center">
 
@@ -31,7 +37,10 @@ export default function HeroSection() {
           Save on hidden conversion fees when you use your Wise Travel card, or send money abroad.
         </p>
 
-        <button className="w-full md:w-auto bg-btn-bg text-accent px-10 py-3 md:py-4 rounded-full font-bold text-lg transition-colors">
+        <button
+          onClick={() => openAuthModal()}
+          className="w-full cursor-pointer md:w-auto bg-btn-bg hover:bg-slate-800 text-accent px-10 py-3 md:py-4 rounded-full font-bold text-lg transition-colors"
+        >
           Sign up in minutes
         </button>
       </div>

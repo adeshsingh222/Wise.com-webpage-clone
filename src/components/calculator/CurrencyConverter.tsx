@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import CurrencyDropdown, { Currency } from "./CurrencyDropdown";
 import ModalDrawer from "../ui/ModalDrawer";
 import { Lock, ChevronRight, Clock, FileText, Tag, Globe } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const rates: Record<string, number> = {
   USD: 1,
@@ -176,7 +177,9 @@ export default function CurrencyConverter() {
   const [sourceCurr, setSourceCurr] = useState<Currency>(defaultSource);
   const [targetCurr, setTargetCurr] = useState<Currency>(defaultTarget);
   const [badgeIndex, setBadgeIndex] = useState(0);
+  const [transferType, setTransferType] = useState<"International" | "Same currency">("International");
   const [isRateModalOpen, setIsRateModalOpen] = useState(false);
+  const { openAuthModal } = useAuth();
 
   const sourceRate = rates[sourceCurr.code];
   const targetRate = rates[targetCurr.code];
@@ -205,9 +208,9 @@ export default function CurrencyConverter() {
     const t1 = setTimeout(() => setIsCalculating(true), 0);
     if (calcTimer.current) clearTimeout(calcTimer.current);
     calcTimer.current = setTimeout(() => setIsCalculating(false), 700);
-    return () => { 
+    return () => {
       clearTimeout(t1);
-      if (calcTimer.current) clearTimeout(calcTimer.current); 
+      if (calcTimer.current) clearTimeout(calcTimer.current);
     };
   }, [sendAmount, sourceCurr, targetCurr]);
 
@@ -399,7 +402,10 @@ export default function CurrencyConverter() {
 
         {/* ── CTA ── */}
         <div className="px-6 pb-6 md:px-8 md:pb-8">
-          <button className="w-full bg-accent text-new-world-dark py-4 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3">
+          <button
+            onClick={() => openAuthModal({ sendAmount, sourceCurrCode: sourceCurr.code })}
+            className="w-full bg-accent text-new-world-dark py-4 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3"
+          >
             {isCalculating ? (
               <>
                 <svg className="animate-spin h-5 w-5 text-new-world-dark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
